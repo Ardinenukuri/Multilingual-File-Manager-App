@@ -1,0 +1,10 @@
+{
+    "welcome_message": "Bienvenido al Administrador de Archivos Multilingüe",
+    "register": "Registrar",
+    "login": "Iniciar sesión",
+    "create_file": "Crear archivo",
+    "read_file": "Leer archivo",
+    "update_file": "Actualizar archivo",
+    "delete_file": "Eliminar archivo"
+  }
+  

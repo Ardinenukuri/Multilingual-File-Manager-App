@@ -1,0 +1,10 @@
+{
+    "welcome_message": "Welcome to the Multilingual File Manager",
+    "register": "Register",
+    "login": "Login",
+    "create_file": "Create File",
+    "read_file": "Read File",
+    "update_file": "Update File",
+    "delete_file": "Delete File"
+  }
+  
