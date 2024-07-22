@@ -55,3 +55,27 @@ exports.deleteFile = (req, res) => {
   });
 };
 
+//upload file 
+exports.uploadFile = async (req, res) => {
+  try {
+      if (!req.file) {
+          return res.status(400).send('No file uploaded');
+      }
+
+      const { originalname, filename, size, mimetype } = req.file;
+      const filePath = path.join(__dirname, '../uploads', req.user.id.toString(), filename);
+
+      // Insert file information into the database
+      await db.query('INSERT INTO files (user_id, filename, path, size, type) VALUES (?, ?, ?, ?, ?)', [
+          req.user.id, originalname, filePath, size, mimetype
+      ]);
+
+      // Add the file to a processing queue if necessary
+      fileQueue.add({ file: filename });
+
+      res.send('File uploaded and queued for processing');
+  } catch (err) {
+      console.error('Error uploading file:', err);
+      res.status(500).send('Server error');
+  }
+};

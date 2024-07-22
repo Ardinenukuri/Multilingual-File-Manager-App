@@ -1,0 +1,10 @@
+{
+    "welcome_message": "Bienvenue dans le Gestionnaire de Fichiers Multilingue",
+    "register": "S'inscrire",
+    "login": "Se connecter",
+    "create_file": "Créer un fichier",
+    "read_file": "Lire le fichier",
+    "update_file": "Mettre à jour le fichier",
+    "delete_file": "Supprimer le fichier"
+  }
+  
