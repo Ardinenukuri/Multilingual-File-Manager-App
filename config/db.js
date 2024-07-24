@@ -1,9 +1,12 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'Nukurimartine2004@',
-  database: 'multilingual-file-manager-app'
+  password: 'ericalivia@2004',
+  database: 'multilingual_file_manager_app',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
 connection.connect((err) => {

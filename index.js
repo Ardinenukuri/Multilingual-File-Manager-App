@@ -1,14 +1,14 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const i18next = require('./config/i18n');
 const middleware = require('i18next-http-middleware');
 const userController = require('./controllers/userController');
-const UploadRoutes = require('./Routes/uploadRoutes');
+const uploadRoutes = require('./routes/uploadRoutes');
 const fileController = require('./controllers/fileController');
 const session = require('express-session');
 const passport = require('./config/passport');
 require('dotenv').config();
-
 
 const app = express();
 
@@ -18,35 +18,42 @@ app.use(session({
   saveUninitialized: true
 }));
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-
 app.use(passport.initialize());
-app.use(passport.session())
+app.use(passport.session());
 
-
-
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(middleware.handle(i18next));
-app.use('/files', UploadRoutes);
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/files', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'files.html'));
+});
+
+app.use('/files', uploadRoutes);
 
 app.post('/register', userController.register);
 app.post('/login', userController.login);
 
-app.post('/files', fileController.createFile);
+app.post('/file', fileController.uploadFile);
 app.get('/files/:filename', fileController.readFile);
 app.put('/files', fileController.updateFile);
 app.delete('/files/:filename', fileController.deleteFile);
 
-
 app.get('/translate', (req, res) => {
-    res.send(req.t('welcome_message'));
-  });
+  res.send(req.t('welcome_message'));
+});
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');

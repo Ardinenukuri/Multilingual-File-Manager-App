@@ -79,3 +79,15 @@ exports.uploadFile = async (req, res) => {
       res.status(500).send('Server error');
   }
 };
+
+// Fetch file list
+exports.getFileList = (req, res) => {
+  db.query('SELECT filename FROM files WHERE user_id = ?', [req.user.id], (err, results) => {
+    if (err) {
+      console.error('Error fetching files:', err);
+      res.status(500).send('Server error');
+      return;
+    }
+    res.json(results);
+  });
+};
