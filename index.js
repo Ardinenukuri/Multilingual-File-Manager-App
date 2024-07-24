@@ -36,6 +36,11 @@ app.get('/files', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'files.html'));
 });
 
+app.get('/home', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'home.html'));
+});
+
+
 app.use('/files', uploadRoutes);
 
 app.post('/register', userController.register);

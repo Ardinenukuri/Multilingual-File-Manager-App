@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const result = await response.json();
             if (result.success) {
-                window.location.href = '/files';
+                window.location.href = '/home';
                 loadFilesPage();
                 console.log('Logged in successfully!')
             } else {
@@ -69,7 +69,7 @@ function showRegister() {
 
 async function loadFilesPage() {
     try {
-        const response = await fetch('/files.html');
+        const response = await fetch('/home.html');
         const filesPageContent = await response.text();
         document.body.innerHTML = filesPageContent;
     } catch (error) {
@@ -77,3 +77,9 @@ async function loadFilesPage() {
         alert('An error occurred while loading the files page.');
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Fetch the username from local storage or a server
+    const username = localStorage.getItem('username') || 'User';
+    document.getElementById('username').textContent = username;
+});

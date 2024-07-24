@@ -23,6 +23,7 @@ exports.register = (req, res) => {
 // User login
 exports.login = (req, res) => {
   const { username, password } = req.body;
+  // localStorage.setItem('username', result.username);
 
   db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
     if (err) {

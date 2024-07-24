@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
     }
     const fileInfos = files.map(file => ({
       filename: file,
-      url: `/uploads/${file}` // URL to access the file
+      url: `/uploads/${file}` 
     }));
     res.status(200).json(fileInfos);
   });

@@ -14,16 +14,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: formData
             });
 
+            if (!response.ok) {
+                const errorText = await response.text(); // Get the response text
+                throw new Error(`HTTP error! status: ${response.status}, ${errorText}`);
+            }
+
             const result = await response.json();
             if (result.success) {
                 alert('File uploaded successfully!');
-                loadFiles(); // Reload the list of files
+                loadFiles();
             } else {
                 alert('Failed to upload file: ' + result.message);
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred during file upload. Please try again.');
+            console.log('An error occurred during file upload. Please try again.');
         }
     });
 
@@ -31,9 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadFiles() {
         try {
             const response = await fetch('/files');
+
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                const errorText = await response.text(); // Get the response text
+                throw new Error(`HTTP error! status: ${response.status}, ${errorText}`);
             }
+
             const files = await response.json();
 
             const fileList = document.getElementById('file-list');
@@ -50,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred while loading files. Please try again.');
+            console.log('An error occurred while loading files. Please try again.');
         }
     }
 
