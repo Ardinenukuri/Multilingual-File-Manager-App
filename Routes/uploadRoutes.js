@@ -3,6 +3,8 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const router = express.Router();
+const fileController = require('../controllers/fileController');
+
 
 // Set up storage with multer
 const storage = multer.diskStorage({
@@ -36,5 +38,8 @@ router.get('/', (req, res) => {
     res.status(200).json(fileInfos);
   });
 });
+
+// Fetch uploaded files
+router.get('/uploaded', fileController.getUploadedFiles);
 
 module.exports = router;

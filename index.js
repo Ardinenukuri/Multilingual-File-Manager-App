@@ -4,10 +4,12 @@ const bodyParser = require('body-parser');
 const i18next = require('./config/i18n');
 const middleware = require('i18next-http-middleware');
 const userController = require('./controllers/userController');
-const uploadRoutes = require('./routes/uploadRoutes');
 const fileController = require('./controllers/fileController');
+const uploadRoutes = require('./Routes/uploadRoutes');
 const session = require('express-session');
 const passport = require('./config/passport');
+const isAuthenticated = require('./middleware/authMiddleware')
+const fileRoutes = require('./Routes/fileRoutes'); 
 require('dotenv').config();
 
 const app = express();
@@ -36,6 +38,9 @@ app.get('/files', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'files.html'));
 });
 
+// Add a route to get the list of files
+app.get('/api/list', fileController.getFileList);
+
 app.get('/home', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'home.html'));
 });
@@ -44,6 +49,8 @@ app.get('/logout', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 app.use('/files', uploadRoutes);
+app.use('/api', fileRoutes);
+
 
 app.post('/register', userController.register);
 app.post('/login', userController.login);
@@ -52,6 +59,7 @@ app.post('/file', fileController.uploadFile);
 app.get('/files/:filename', fileController.readFile);
 app.put('/files', fileController.updateFile);
 app.delete('/files/:filename', fileController.deleteFile);
+
 
 app.get('/translate', (req, res) => {
   res.send(req.t('welcome_message'));
