@@ -1,0 +1,13 @@
+{
+  "welcome_message": "Murahawe Ikaze, {{username}}!",
+  "home_page": {
+    "title": "Home Page",
+    "welcome": "Murahawe Ikaze ku rubuga rwacu"
+  },
+  "file_manager": {
+    "title": "File Manager",
+    "upload_success": "File uploaded successfully!",
+    "upload_fail": "Failed to upload file."
+  }
+}
+

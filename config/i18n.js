@@ -1,15 +1,18 @@
 const i18next = require('i18next');
-const Backend = require('i18next-fs-backend');
-const middleware = require('i18next-http-middleware');
-const path = require('path');
+const Backend = require('i18next-fs-backend'); // File system backend to load translations
+const Middleware = require('i18next-http-middleware');
 
 i18next
   .use(Backend)
-  .use(middleware.LanguageDetector)
+  .use(Middleware.LanguageDetector)
   .init({
-    fallbackLng: 'en',
+    fallbackLng: 'en', 
+    preload: ['en', 'fr', 'ki', 'sw'], 
     backend: {
-      loadPath: path.join(__dirname, 'locales', '{{lng}}', 'translation.json')
+      loadPath: __dirname + '/locales/{{lng}}/{{ns}}.json' 
+    },
+    interpolation: {
+      escapeValue: false
     }
   });
 

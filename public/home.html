@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
+    <title>{{_('title')}}</title>
     <link rel="stylesheet" href="home.css" />
 </head>
 <body>
@@ -16,11 +16,20 @@
                 <li><a href="/profile">Profile</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
+            <div id="language-selector">
+                <h3>App Language</h3>
+                <select id="language-dropdown" onchange="changeLanguage(this.value)">
+                    <option value="kirundi">Kirundi</option>
+                    <option value="french">French</option>
+                    <option value="english" selected>English</option>
+                    <option value="swahili">Swahili</option>
+                </select>
+            </div>
         </aside>
         <main class="content">
-            <h1>Welcome, <span id="username">User</span>!</h1>
+            <h1>{{_('welcome_message')}}</h1>
         </main>
     </div>
-    <script src="script.js"></script>
+    <script src="home.js"></script>
 </body>
 </html>

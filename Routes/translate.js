@@ -2,19 +2,17 @@ const express = require('express');
 const router = express.Router();
 const i18next = require('../config/i18n');
 
-router.get('/translate', (req, res) => {
-  const { lang } = req.query; // Get the language from the query parameter
-
-  // Set the language preference for i18next
+// Middleware to set language based on query parameter
+router.use((req, res, next) => {
+  const { lang } = req.query;
   i18next.changeLanguage(lang || 'en');
+  next();
+});
 
-  // Example message key (this could be dynamic based on your needs)
-  const messageKey = req.query.messageKey || 'welcome_message';
-
-  // Get the translated message
+router.get('/translate', (req, res) => {
+  const messageKey = req.query.messageKey || 'welcome_message'; 
   const translatedMessage = i18next.t(messageKey);
 
-  // Send the response
   res.json({ message: translatedMessage });
 });
 

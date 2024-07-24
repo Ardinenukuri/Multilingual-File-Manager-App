@@ -1,35 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>File Manager</title>
     <link rel="stylesheet" href="files.css" />
     <link rel="stylesheet" href="home.css" />
-  </head>
-  <body>
+</head>
+<body>
     <div>
       <aside class="sidebar">
         <h2>Menu</h2>
         <ul>
-          <li><a href="/home">Home</a></li>
-          <li><a href="/files">File Manager</a></li>
-          <li><a href="/profile" aria-disabled="true">Profile</a></li>
-          <li><a href="/logout" aria-disabled="true">Logout</a></li>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/files">File Manager</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
         </ul>
-      </aside>
-      <main>
-        <div class="content container">
-          <h2>File Manager</h2>
-          <form id="upload-form">
-            <input type="file" id="file-upload" name="file" required />
-            <button type="submit">Upload File</button>
-          </form>
-          <h3>Uploaded Files</h3>
+        <div id="language-selector">
+            <h3>App Language</h3>
+            <select id="language-dropdown" onchange="changeLanguage(this.value)">
+                <option value="kirundi">Kirundi</option>
+                <option value="french">French</option>
+                <option value="english" selected>English</option>
+                <option value="swahili">Swahili</option>
+            </select>
         </div>
-      </main>
+    </aside>
+        <main>
+            <div class="content container">
+                <h2 id="page-title">{{_('title')}}</h2>
+                <form id="upload-form">
+                    <input type="file" id="file-upload" name="file" required />
+                    <button type="submit" class="button">{{_('upload_file')}}</button>
+                </form>
+                <h3>Uploaded Files</h3>
+                <ul id="file-list"></ul>
+            </div>
+        </main>
     </div>
 
     <script src="file-manager.js"></script>
-  </body>
+    <script>
+        async function changeLanguage(lang) {
+            try {
+                const response = await fetch(`/translate?lang=${lang}&messageKey=file_manager`);
+                const result = await response.json();
+                document.getElementById('page-title').textContent = result.message.title;
+                // Add code to update other translatable text on the page if needed
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Initial load
+        changeLanguage('en');
+    </script>
+</body>
 </html>

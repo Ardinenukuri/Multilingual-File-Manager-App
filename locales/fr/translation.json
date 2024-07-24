@@ -1,10 +1,13 @@
 {
-    "welcome_message": "Bienvenue dans le Gestionnaire de Fichiers Multilingue",
-    "register": "S'inscrire",
-    "login": "Se connecter",
-    "create_file": "Créer un fichier",
-    "read_file": "Lire le fichier",
-    "update_file": "Mettre à jour le fichier",
-    "delete_file": "Supprimer le fichier"
+  "welcome_message": "Bienvenue, {{username}}!",
+  "home_page": {
+    "title": "Page d'Acceuil",
+    "welcome": "Bienvenue sur la page d'acceuil!"
+  },
+  "file_manager": {
+    "title": "Gestionaire de fichiers",
+    "upload_success": "Fichier télécharge avec succès",
+    "upload_fail": "Erreur de télécharger le fichier",
+    "upload_file": "Télécharger un fichier"
   }
-  
+}
