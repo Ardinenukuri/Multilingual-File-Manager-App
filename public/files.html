@@ -9,25 +9,25 @@
   </head>
   <body>
     <div>
-        <div class="container">
-            <aside class="sidebar">
-                <h2>Menu</h2>
-                <ul>
-                    <li><a href="/home">Home</a></li>
-                    <li><a href="/files">File Manager</a></li>
-                    <li><a href="/profile">Profile</a></li>
-                    <li><a href="/logout">Logout</a></li>
-                </ul>
-            </aside>
-            <h2>File Manager</h2>
-            <form id="upload-form">
-              <input type="file" id="file-upload" name="file" required />
-              <button type="submit">Upload File</button>
-            </form>
-      
+      <aside class="sidebar">
+        <h2>Menu</h2>
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/files">File Manager</a></li>
+          <li><a href="/profile" aria-disabled="true">Profile</a></li>
+          <li><a href="/logout" aria-disabled="true">Logout</a></li>
+        </ul>
+      </aside>
+      <main>
+        <div class="content container">
+          <h2>File Manager</h2>
+          <form id="upload-form">
+            <input type="file" id="file-upload" name="file" required />
+            <button type="submit">Upload File</button>
+          </form>
+          <h3>Uploaded Files</h3>
         </div>
-
-      <h3>Uploaded Files</h3>
+      </main>
     </div>
 
     <script src="file-manager.js"></script>
