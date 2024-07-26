@@ -91,36 +91,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred during file upload. Please try again.');
         }
     });
 
-    // Function to load the list of uploaded files
-    async function loadFiles() {
-        try {
-            const response = await fetch('/files');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const files = await response.json();
-
-            const fileList = document.getElementById('file-list');
-            fileList.innerHTML = '';
-
-            files.forEach(file => {
-                const listItem = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = file.url; // Link to the file
-                link.textContent = file.filename;
-                link.target = '_blank'; // Open in new tab
-                listItem.appendChild(link);
-                fileList.appendChild(listItem);
-            });
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred while loading files. Please try again.');
-        }
-    }
+    
 
     // Function to handle language change
     document.querySelectorAll('#language-switcher button').forEach(button => {

@@ -16,7 +16,7 @@ const ensureDirectoryExistence = (filePath) => {
 // Create a new file
 exports.createFile = (req, res) => {
   const { filename, content } = req.body;
-  const filePath = path.join(__dirname, 'files', filename);
+  const filePath = path.join(__dirname, '../uploads', filename);
 
   ensureDirectoryExistence(filePath);
 
@@ -39,7 +39,7 @@ exports.createFile = (req, res) => {
 // Read a file
 exports.readFile = (req, res) => {
   const { filename } = req.params;
-  const filePath = path.join(__dirname, 'files', filename);
+  const filePath = path.join(__dirname, '../uploads', filename);
 
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
@@ -58,7 +58,7 @@ exports.readFile = (req, res) => {
 // Update a file
 exports.updateFile = (req, res) => {
   const { filename, content } = req.body;
-  const filePath = path.join(__dirname, 'files', filename);
+  const filePath = path.join(__dirname, '../uploads', filename);
 
   ensureDirectoryExistence(filePath);
 
@@ -74,7 +74,7 @@ exports.updateFile = (req, res) => {
 // Delete a file
 exports.deleteFile = (req, res) => {
   const { filename } = req.params;
-  const filePath = path.join(__dirname, 'files', filename);
+  const filePath = path.join(__dirname, '../uploads', filename);
 
   fs.unlink(filePath, (err) => {
     if (err) {

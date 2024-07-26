@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Files</title>
+    <style>
+        body {
+            padding:0;
+            margin:0;
+        }
+        
+        .container {
+            display: flex;
+        }
+        
+        .sidebar {
+            width: fit-content;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+        }
+        
+        .sidebar h2 {
+            margin-top: 0;
+        }
+        
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+        
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        
+        .sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+        
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            flex: 1;
+        }
+        
+        #language-selector {
+            margin-top: auto;
+            margin-top: 20px;
+        }
+        #language-dropdown {
+            width: 100%;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/files">File Manager</a></li>
+                <li><a href="/files/uploaded">File List</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+            <div id="language-selector">
+                <h3>App Language</h3>
+                <select id="language-dropdown" onchange="changeLanguage(this.value)">
+                    <option value="kirundi">Kirundi</option>
+                    <option value="french">French</option>
+                    <option value="english" selected>English</option>
+                    <option value="swahili">Swahili</option>
+                </select>
+            </div>
+        </aside>
+        <main>
+            <div class="content">
+                <h1 id="page-title">Uploaded Files</h1>
+                <button id="create-file-btn" class="button">Create New File</button>
+                <h2>List of Files</h2>
+                <ul id="file-list">
+                  
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <script src="/scripts/uploaded.js"></script> <!-- Ensure you have uploaded.js file -->
+    <script>
+        async function changeLanguage(lang) {
+            try {
+                const response = await fetch(`/translate?lang=${lang}&messageKey=file_manager`);
+                const result = await response.json();
+                document.getElementById('page-title').textContent = result.message.title;
+                document.getElementById('create-file-btn').textContent = result.message.create_file_button;
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Initial load
+        changeLanguage('english'); // Default language
+    </script>
+</body>
+</html>

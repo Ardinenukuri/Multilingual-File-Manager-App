@@ -9,33 +9,32 @@
 </head>
 <body>
     <div>
-      <aside class="sidebar">
-        <h2>Menu</h2>
-        <ul>
-            <li><a href="/home">Home</a></li>
-            <li><a href="/files">File Manager</a></li>
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
-        <div id="language-selector">
-            <h3>App Language</h3>
-            <select id="language-dropdown" onchange="changeLanguage(this.value)">
-                <option value="kirundi">Kirundi</option>
-                <option value="french">French</option>
-                <option value="english" selected>English</option>
-                <option value="swahili">Swahili</option>
-            </select>
-        </div>
-    </aside>
+        <aside class="sidebar">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/files">File Manager</a></li>
+                <li><a href="/files/uploaded">File List</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+            <div id="language-selector">
+                <h3>App Language</h3>
+                <select id="language-dropdown" onchange="changeLanguage(this.value)">
+                    <option value="kirundi">Kirundi</option>
+                    <option value="french">French</option>
+                    <option value="english" selected>English</option>
+                    <option value="swahili">Swahili</option>
+                </select>
+            </div>
+        </aside>
         <main>
             <div class="content container">
-                <h2 id="page-title">{{_('title')}}</h2>
+                <h2 id="page-title">File Manager</h2>
                 <form id="upload-form">
                     <input type="file" id="file-upload" name="file" required />
-                    <button type="submit" class="button">{{_('upload_file')}}</button>
+                    <button type="submit" class="button">Upload File</button>
                 </form>
-                <h3>Uploaded Files</h3>
-                <ul id="file-list"></ul>
             </div>
         </main>
     </div>
@@ -47,6 +46,7 @@
                 const response = await fetch(`/translate?lang=${lang}&messageKey=file_manager`);
                 const result = await response.json();
                 document.getElementById('page-title').textContent = result.message.title;
+                document.querySelector('#upload-form button').textContent = result.message.upload_button;
                 // Add code to update other translatable text on the page if needed
             } catch (error) {
                 console.error('Error:', error);
@@ -54,7 +54,7 @@
         }
 
         // Initial load
-        changeLanguage('en');
+        changeLanguage('english'); // Default language
     </script>
 </body>
 </html>

@@ -38,8 +38,13 @@ app.get('/files', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'files.html'));
 });
 
+app.get('/files/uploaded', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'uploaded.html'))
+})
+
 // Add a route to get the list of files
 app.get('/api/list', fileController.getFileList);
+app.get('/api/uploaded', fileController.getUploadedFiles);
 
 app.get('/home', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'home.html'));
@@ -57,8 +62,34 @@ app.post('/login', userController.login);
 
 app.post('/file', fileController.uploadFile);
 app.get('/files/:filename', fileController.readFile);
-app.put('/files', fileController.updateFile);
-app.delete('/files/:filename', fileController.deleteFile);
+// app.put('/files', fileController.updateFile);
+// app.delete('/files/:filename', fileController.deleteFile);
+
+app.put('/files/:filename', async (req, res) => {
+  const { filename } = req.params;
+  const { newFilename } = req.body;
+
+  try {
+      // Perform the file rename operation here
+      // Ensure you handle file renaming logic
+      res.json({ success: true });
+  } catch (error) {
+      res.status(500).json({ success: false, message: 'Failed to rename file.' });
+  }
+});
+
+// Delete a file
+app.delete('/files/:filename', async (req, res) => {
+  const { filename } = req.params;
+
+  try {
+      // Perform the file deletion operation here
+      // Ensure you handle file deletion logic
+      res.json({ success: true });
+  } catch (error) {
+      res.status(500).json({ success: false, message: 'Failed to delete file.' });
+  }
+});
 
 
 app.get('/translate', (req, res) => {
