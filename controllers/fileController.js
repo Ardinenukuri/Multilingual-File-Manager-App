@@ -57,17 +57,24 @@ exports.readFile = (req, res) => {
 
 // Update a file
 exports.updateFile = (req, res) => {
-  const { filename, content } = req.body;
-  const filePath = path.join(__dirname, '../uploads', filename);
+  const { filename } = req.params;
+  const { newFilename } = req.body;
+  const oldFilePath = path.join(__dirname, '../uploads', filename);
+  const newFilePath = path.join(__dirname, '../uploads', newFilename);
 
-  ensureDirectoryExistence(filePath);
-
-  fs.writeFile(filePath, content, (err) => {
+  fs.rename(oldFilePath, newFilePath, (err) => {
     if (err) {
-      console.error('Error updating file:', err);
-      return res.status(500).send('Server error while updating file');
+      console.error('Error renaming file:', err);
+      return res.status(500).send('Server error while renaming file');
     }
-    res.send('File updated successfully');
+
+    db.query('UPDATE files SET filename = ?, path = ? WHERE filename = ?', [newFilename, newFilePath, filename], (err, result) => {
+      if (err) {
+        console.error('Error updating file record in database:', err);
+        return res.status(500).send('Server error while updating file information');
+      }
+      res.send('File renamed successfully');
+    });
   });
 };
 
@@ -76,39 +83,21 @@ exports.deleteFile = (req, res) => {
   const { filename } = req.params;
   const filePath = path.join(__dirname, '../uploads', filename);
 
-  // Check if the file exists
-  fs.access(filePath, fs.constants.F_OK, (err) => {
+  fs.unlink(filePath, (err) => {
     if (err) {
-      console.error('File does not exist:', filePath);
-      return res.status(404).send('File not found');
+      console.error('Error deleting file from file system:', err);
+      return res.status(500).send('Server error while deleting file from file system');
     }
 
-    // Delete the file
-    fs.unlink(filePath, (err) => {
+    db.query('DELETE FROM files WHERE filename = ?', [filename], (err, result) => {
       if (err) {
-        console.error('Error deleting file:', err);
-        return res.status(500).send('Server error while deleting file');
+        console.error('Error deleting file record from database:', err);
+        return res.status(500).send('Server error while deleting file record from database');
       }
-
-      // Delete the record from the database
-      db.query('DELETE FROM files WHERE filename = ?', [filename], (err, result) => {
-        if (err) {
-          console.error('Error deleting file record from database:', err);
-          return res.status(500).send('Server error while deleting file information');
-        }
-
-        // Confirm successful deletion
-        if (result.affectedRows === 0) {
-          console.error('No record found to delete for filename:', filename);
-          return res.status(404).send('File record not found');
-        }
-
-        res.send('File deleted successfully');
-      });
+      res.send('File deleted successfully');
     });
   });
 };
-
 
 // Upload file 
 exports.uploadFile = async (req, res) => {

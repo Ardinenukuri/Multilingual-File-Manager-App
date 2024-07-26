@@ -98,7 +98,7 @@ async function deleteFile(filename) {
                 throw new Error(`HTTP error! status: ${response.status}, ${errorText}`);
             }
 
-            loadFiles(); // Reload the file list after deletion
+            loadFiles(); 
         } catch (error) {
             console.error('Error:', error);
             alert('An error occurred while deleting the file. Please try again.');

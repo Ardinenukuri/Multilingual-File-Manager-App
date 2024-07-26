@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{_('title')}}</title>
-    <link rel="stylesheet" href="home.css" />
+    <title>Home - File Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles/home.css" />
 </head>
-<body>
-    <div class="container">
-        <aside class="sidebar">
-            <h2>Menu</h2>
-            <ul>
-                <li><a href="/home">Home</a></li>
-                <li><a href="/files">File Manager</a></li>
-                <li><a href="/files/uploaded">File List</a></li>
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="/logout">Logout</a></li>
+<body class="background bg-gray-300">
+    <div class="flex">
+        <aside class="w-64 bg-green-800 text-white h-screen p-6 fixed">
+            <h2 class="text-2xl font-bold mb-6">Menu</h2>
+            <ul class="space-y-4">
+                <li><a href="/home" class="hover:text-green-300">🏠 Home</a></li>
+                <li><a href="/files" class="hover:text-green-300">📁 File Manager</a></li>
+                <li><a href="/files/uploaded" class="hover:text-green-300">📂 File List</a></li>
+                <li><a href="/profile" class="hover:text-green-300">👤 Profile</a></li>
+                <li><a href="/logout" class="hover:text-green-300">🚪 Logout</a></li>
             </ul>
-            <div id="language-selector">
-                <h3>App Language</h3>
-                <select id="language-dropdown" onchange="changeLanguage(this.value)">
+            <div id="language-selector" class="mt-6">
+                <h3 class="text-lg font-semibold">App Language</h3>
+                <select id="language-dropdown" onchange="changeLanguage(this.value)" class="mt-2 w-full p-2 rounded border border-gray-300 text-black">
                     <option value="kirundi">Kirundi</option>
                     <option value="french">French</option>
                     <option value="english" selected>English</option>
@@ -27,10 +28,10 @@
                 </select>
             </div>
         </aside>
-        <main class="content">
-            <h1>{{_('welcome_message')}}</h1>
+        <main class="ml-64 p-8 flex-1">
+            <h1 class="text-5xl font-bold text-green-800 text-center">Welcome to File Manager</h1>
         </main>
     </div>
-    <script src="home.js"></script>
+    <script src="/script/home.js"></script>
 </body>
 </html>
