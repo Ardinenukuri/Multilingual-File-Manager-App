@@ -76,21 +76,39 @@ exports.deleteFile = (req, res) => {
   const { filename } = req.params;
   const filePath = path.join(__dirname, '../uploads', filename);
 
-  fs.unlink(filePath, (err) => {
+  // Check if the file exists
+  fs.access(filePath, fs.constants.F_OK, (err) => {
     if (err) {
-      console.error('Error deleting file:', err);
-      return res.status(500).send('Server error while deleting file');
+      console.error('File does not exist:', filePath);
+      return res.status(404).send('File not found');
     }
 
-    db.query('DELETE FROM files WHERE filename = ?', [filename], (err, result) => {
+    // Delete the file
+    fs.unlink(filePath, (err) => {
       if (err) {
-        console.error('Error deleting file record from database:', err);
-        return res.status(500).send('Server error while deleting file information');
+        console.error('Error deleting file:', err);
+        return res.status(500).send('Server error while deleting file');
       }
-      res.send('File deleted successfully');
+
+      // Delete the record from the database
+      db.query('DELETE FROM files WHERE filename = ?', [filename], (err, result) => {
+        if (err) {
+          console.error('Error deleting file record from database:', err);
+          return res.status(500).send('Server error while deleting file information');
+        }
+
+        // Confirm successful deletion
+        if (result.affectedRows === 0) {
+          console.error('No record found to delete for filename:', filename);
+          return res.status(404).send('File record not found');
+        }
+
+        res.send('File deleted successfully');
+      });
     });
   });
 };
+
 
 // Upload file 
 exports.uploadFile = async (req, res) => {

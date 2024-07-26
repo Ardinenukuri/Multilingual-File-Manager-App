@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             document.getElementById('page-title').textContent = result.message.title;
             document.querySelector('#upload-form button').textContent = result.message.upload_button;
-            // Update other translatable text as needed
+        
 
         } catch (error) {
             console.error('Error:', error);

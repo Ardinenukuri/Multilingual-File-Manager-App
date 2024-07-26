@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const fileList = document.getElementById('file-list');
         fileList.innerHTML = '';
 
+
         files.forEach(file => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
@@ -33,21 +34,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 <button class="edit-btn">✏️</button>
                 <button class="delete-btn">🗑️</button>
             `;
-
+        
             const editBtn = listItem.querySelector('.edit-btn');
             const deleteBtn = listItem.querySelector('.delete-btn');
             const fileNameSpan = listItem.querySelector('.file-name');
-
+        
             editBtn.addEventListener('click', () => editFile(file.filename, fileNameSpan));
             deleteBtn.addEventListener('click', () => deleteFile(file.filename));
-
-            listItem.querySelector('.file-name').addEventListener('click', (e) => {
+        
+            fileNameSpan.addEventListener('click', (e) => {
                 e.preventDefault();
-                window.location.href = `/files/${file.filename}`;
+                const downloadLink = document.createElement('a');
+                downloadLink.href = `/files/${file.filename}`;
+                downloadLink.download = file.filename;
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
             });
-
+        
             fileList.appendChild(listItem);
         });
+        
     } catch (error) {
         console.error('Error:', error);
         alert('An error occurred while loading files. Please try again.');
@@ -58,7 +65,7 @@ async function editFile(filename, fileNameSpan) {
     const newFilename = prompt('Enter new file name:', filename);
     if (newFilename && newFilename !== filename) {
         try {
-            const response = await fetch(`/api/files/${filename}`, {
+            const response = await fetch(`/files/${filename}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -82,7 +89,7 @@ async function editFile(filename, fileNameSpan) {
 async function deleteFile(filename) {
     if (confirm('Are you sure you want to delete this file?')) {
         try {
-            const response = await fetch(`/api/files/${filename}`, {
+            const response = await fetch(`/files/${filename}`, {
                 method: 'DELETE'
             });
 
@@ -104,6 +111,6 @@ async function deleteFile(filename) {
 
     // Add event listener to the Create New File button
     document.getElementById('create-file-btn').addEventListener('click', () => {
-        window.location.href = '/files'; // Redirect to the file creation page
+        window.location.href = '/files';
     });
 });
