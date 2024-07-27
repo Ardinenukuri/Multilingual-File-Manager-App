@@ -14,13 +14,12 @@
             <h2 class="text-2xl font-bold mb-6">Menu</h2>
             <ul class="space-y-4">
                 <li><a href="/home" class="hover:text-green-300">🏠 Home</a></li>
-                <li><a href="/files" class="hover:text-green-300">📁 File Manager</a></li>
                 <li><a href="/files/uploaded" class="hover:text-green-300">📂 File List</a></li>
-                <li><a href="/profile" class="hover:text-green-300">👤 Profile</a></li>
+                <li><a href="/files" class="hover:text-green-300">📁 Actions</a></li>
                 <li><a href="/logout" class="hover:text-green-300">🚪 Logout</a></li>
             </ul>
             <div id="language-selector" class="mt-6">
-                <h3 class="text-lg font-semibold">App Language</h3>
+                <h3 class="text-lg font-semibold">Language</h3>
                 <select id="language-dropdown" onchange="changeLanguage(this.value)" class="mt-2 w-full p-2 rounded border border-gray-300 text-black">
                     <option value="kirundi">Kirundi</option>
                     <option value="french">French</option>
@@ -35,9 +34,39 @@
                 <input type="file" id="file-upload" name="file" class="p-2 border border-gray-300 rounded" required />
                 <button type="submit" class="bg-green-600 text-white py-2 px-4 rounded mt-4 hover:bg-green-700">Upload File</button>
             </form>
+            <div class="mx-auto pt-16">
+                <div id="upload" class="bg-white p-4 rounded shadow-md mb-6">
+                  <h2 class="text-xl font-semibold mb-4">Create a file</h2>
+                  <form id="createForm">
+                    <div class="mb-4">
+                      <label for="filename" class="block text-gray-700">Filename</label>
+                      <input
+                        type="text"
+                        id="filename"
+                        class="w-full p-2 border border-gray-300 rounded"
+                        required
+                      />
+                    </div>
+                    <div class="mb-4">
+                      <label for="filecontent" class="block text-gray-700">Content</label>
+                      <textarea
+                        id="filecontent"
+                        class="w-full p-2 border border-gray-300 rounded"
+                        required
+                      ></textarea>
+                    </div>
+                    <button
+                      type="submit"
+                      class="bg-green-600 text-white py-2 px-4 rounded mt-4 hover:bg-green-700"
+                    >
+                      Create
+                    </button>
+                  </form>
+                </div>
+                <ul id="file-list" class="list-disc list-inside mt-4"></ul>
         </main>
     </div>
-    <script src="file-manager.js"></script>
+    <script src="/scripts/file-manager.js"></script>
     <script>
         async function changeLanguage(lang) {
             try {
@@ -45,7 +74,6 @@
                 const result = await response.json();
                 document.getElementById('page-title').textContent = result.message.title;
                 document.querySelector('#upload-form button').textContent = result.message.upload_button;
-                // Add code to update other translatable text on the page if needed
             } catch (error) {
                 console.error('Error:', error);
             }

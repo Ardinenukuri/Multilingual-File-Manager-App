@@ -4,9 +4,9 @@ const isAuthenticated = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
-router.post('/', fileController.createFile);
+router.post('/create', fileController.createFile);
 router.get('/:filename', fileController.readFile);
-router.put('/', fileController.updateFile);
+router.put('/update', fileController.updateFile);
 router.delete('/:filename', fileController.deleteFile);
 
 // Fetch file list

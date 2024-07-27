@@ -60,13 +60,12 @@
             <h2 class="text-2xl font-bold mb-6">Menu</h2>
             <ul class="space-y-4">
                 <li><a href="/home" class="hover:text-green-300">🏠 Home</a></li>
-                <li><a href="/files" class="hover:text-green-300">📁 File Manager</a></li>
                 <li><a href="/files/uploaded" class="hover:text-green-300">📂 File List</a></li>
-                <li><a href="/profile" class="hover:text-green-300">👤 Profile</a></li>
+                <li><a href="/files" class="hover:text-green-300">📁 Actions</a></li>
                 <li><a href="/logout" class="hover:text-green-300">🚪 Logout</a></li>
             </ul>
             <div id="language-selector" class="mt-6">
-                <h3 class="text-lg font-semibold">App Language</h3>
+                <h3 class="text-lg font-semibold">Language</h3>
                 <select id="language-dropdown" onchange="changeLanguage(this.value)" class="mt-2 w-full p-2 rounded border border-gray-300 text-black">
                     <option value="kirundi">Kirundi</option>
                     <option value="french">French</option>
@@ -75,16 +74,28 @@
                 </select>
             </div>
         </aside>
-        <main class="ml-64 p-8 flex-1">
-            <h1 class="text-3xl font-bold text-green-800" id="page-title">Uploaded Files</h1>
-            <button id="create-file-btn" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Create New File</button>
-            <h2 class="text-xl font-semibold mt-6">List of Files</h2>
-            <ul id="file-list" class="mt-4">
-                <!-- File list items go here -->
-            </ul>
+        <main class="ml-80 p-8 flex-1">
+            <h1 class="text-3xl font-bold text-green-800 text-center mb-8" id="page-title">File Manager</h1>
+            <div class="flex justify-between items-center">
+                <button id="create-file-btn" class="file bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Create New File</button>
+                <button class="file bg-green-600 text-white py-2 px-4 rounded mt-4 hover:bg-green-700">Upload File</button>
+                
+            </div >
+            <div class="flex-col justify-around items-left">
+                <h2 class="text-xl font-semibold mt-6">Files</h2>
+                <div>
+                    <ul id="file-list" class="mt-4">
+                         <!-- File list items go here -->
+                    </ul>
+                </div>
+            
+            </div>
+            
         </main>
     </div>
-    <script src="/scripts/uploaded.js"></script> <!-- Ensure you have uploaded.js file -->
+    <script src="/scripts/uploaded.js"></script>
+    <script src="/scripts/file-manager.js"></script>
+
     <script>
         async function changeLanguage(lang) {
             try {

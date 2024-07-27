@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!response.ok) {
-                const errorText = await response.text(); // Get the response text
+                const errorText = await response.text();
                 throw new Error(`HTTP error! status: ${response.status}, ${errorText}`);
             }
 
@@ -31,36 +31,68 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('An error occurred during file upload. Please try again.');
         }
     });
+    
+    // Function to handle file creation
+    document.getElementById('createForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-    // Function to load the list of uploaded files
-    async function loadFiles() {
+        const filename = document.getElementById('filename').value;
+        const filecontent = document.getElementById('filecontent').value;
+
         try {
-            const response = await fetch('/files');
-
-            if (!response.ok) {
-                const errorText = await response.text(); // Get the response text
-                throw new Error(`HTTP error! status: ${response.status}, ${errorText}`);
-            }
-
-            const files = await response.json();
-
-            const fileList = document.getElementById('file-list');
-            fileList.innerHTML = '';
-
-            files.forEach(file => {
-                const listItem = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = file.url; // Link to the file
-                link.textContent = file.filename;
-                link.target = '_blank'; // Open in new tab
-                listItem.appendChild(link);
-                fileList.appendChild(listItem);
+            const response = await fetch('/files/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ filename, content: filecontent }),
             });
+
+            const result = await response.json();
+            if (result.success) {
+                alert('File created successfully!');
+                loadFiles();
+                document.getElementById('createForm').reset();
+            } else {
+                alert('Failed to create file: ' + result.message);
+            }
         } catch (error) {
             console.error('Error:', error);
-            console.log('An error occurred while loading files. Please try again.');
+            alert('An error occurred during file creation. Please try again.');
         }
-    }
+    });
+
+
+
+    // // Function to load the list of uploaded files
+    // async function loadFiles() {
+    //     try {
+    //         const response = await fetch('/files');
+
+    //         if (!response.ok) {
+    //             const errorText = await response.text(); // Get the response text
+    //             throw new Error(`HTTP error! status: ${response.status}, ${errorText}`);
+    //         }
+
+    //         const files = await response.json();
+
+    //         const fileList = document.getElementById('file-list');
+    //         fileList.innerHTML = '';
+
+    //         files.forEach(file => {
+    //             const listItem = document.createElement('li');
+    //             const link = document.createElement('a');
+    //             link.href = file.url; // Link to the file
+    //             link.textContent = file.filename;
+    //             link.target = '_blank'; // Open in new tab
+    //             listItem.appendChild(link);
+    //             fileList.appendChild(listItem);
+    //         });
+    //     } catch (error) {
+    //         console.error('Error:', error);
+    //         console.log('An error occurred while loading files. Please try again.');
+    //     }
+    // }
 
     // Initial load of files
     loadFiles();
@@ -84,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const result = await response.json();
             if (result.success) {
-                alert('File uploaded successfully!');
+               
                 loadFiles();
             } else {
                 alert('Failed to upload file.');
