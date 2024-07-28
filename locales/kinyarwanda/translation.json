@@ -13,9 +13,9 @@
     "upload_text": "Shyiraho ifishi"
   },
   "navbar": {
-    "home" : "Ahabanza",
-    "file_list": "Urutonde rw'amadosiye",
-    "actions": "Ibikorwa",
-    "logout": "Sohoka"
+    "home" : "🏠 Ahabanza",
+    "file_list": "📂 Urutonde rw'amadosiye",
+    "actions": "📁 Ibikorwa",
+    "logout": "🚪 Sohoka"
   }
 }

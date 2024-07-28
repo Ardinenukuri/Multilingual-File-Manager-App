@@ -13,9 +13,9 @@
     "upload_text": "Pakia faili"
   },
   "navbar": {
-    "home" : "Nyumbani",
-    "file_list": "Orodha ya Faili",
-    "actions": "Vitendo",
-    "logout": "Ondoka"
+    "home" : "🏠 Nyumbani",
+    "file_list": "📂 Orodha ya Faili",
+    "actions": "📁 Vitendo",
+    "logout": "🚪 Ondoka"
   }
 }

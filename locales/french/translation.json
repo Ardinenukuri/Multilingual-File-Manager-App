@@ -13,9 +13,9 @@
     "upload_text": "Télécharger un fichier"
   },
   "navbar": {
-    "home" : "Accueil",
-    "file_list": "Liste des fichiers",
-    "actions": "Actions",
-    "logout": "Déconnexion"
+    "home" : "🏠 Accueil",
+    "file_list": "📂 Liste des fichiers",
+    "actions": "📁 Actions",
+    "logout": "🚪 Déconnexion"
   }
 }

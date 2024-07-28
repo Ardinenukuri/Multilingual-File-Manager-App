@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     const languageMap = {
-        "en": "english",
-        "fr": "french",
-        "sw": "swahili",
-        "kin": "kinyarwanda"
+        "en": "English",
+        "fr": "French",
+        "sw": "Swahili",
+        "kin": "Kinyarwanda"
     };
 
     const defaultLanguage = "english";
@@ -67,16 +67,22 @@ document.addEventListener("DOMContentLoaded", function () {
     function changeLanguage(language) {
         loadTranslations(language).then(updateTranslations).catch(error => {
             console.error('Error updating translations:', error);
-            changeLanguage(defaultLanguage);  // Fallback to default language
+            changeLanguage(defaultLanguage); 
         });
     }
 
-    const userLanguage = (navigator.language || 'en').split('-')[0];
-    changeLanguage(userLanguage);
+    const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language || 'en').split('-')[0];
+    changeLanguage(savedLanguage);
+
+    const selectedLanguageFullName = languageMap[savedLanguage] || languageMap[defaultLanguage];
+    selectedLanguageFullName.toUpperCase();
+    document.getElementById('selected-language').textContent = selectedLanguageFullName;
+    
 
     document.getElementById('language-dropdown').addEventListener('change', function (event) {
         const selectedLanguage = event.target.value;
         console.log(`Selected language: ${selectedLanguage}`);
+        localStorage.setItem('selectedLanguage', selectedLanguage);
         changeLanguage(selectedLanguage);
     });
 });
