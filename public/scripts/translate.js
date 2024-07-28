@@ -62,6 +62,21 @@ document.addEventListener("DOMContentLoaded", function () {
         if (createTextElement) {
             createTextElement.textContent = translations.file_manager?.create_text || 'Create a File';
         }
+
+        const filesElement = document.getElementById('files');
+        if (filesElement) {
+            filesElement.textContent = translations.file_manager?.files || 'Files';
+        }
+
+        const fileNameElement = document.getElementById('file_name');
+        if (fileNameElement) {
+            fileNameElement.textContent = translations.file_manager?.file_name || 'File Name';
+        }
+        
+        const fileContentElement = document.getElementById('file_content');
+        if (fileContentElement) {
+            fileContentElement.textContent = translations.file_manager?.file_content || 'File Content';
+        }
     }
 
     function changeLanguage(language) {

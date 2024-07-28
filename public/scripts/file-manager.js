@@ -61,41 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('An error occurred during file creation. Please try again.');
         }
     });
-
-
-
-    // // Function to load the list of uploaded files
-    // async function loadFiles() {
-    //     try {
-    //         const response = await fetch('/files');
-
-    //         if (!response.ok) {
-    //             const errorText = await response.text(); // Get the response text
-    //             throw new Error(`HTTP error! status: ${response.status}, ${errorText}`);
-    //         }
-
-    //         const files = await response.json();
-
-    //         const fileList = document.getElementById('file-list');
-    //         fileList.innerHTML = '';
-
-    //         files.forEach(file => {
-    //             const listItem = document.createElement('li');
-    //             const link = document.createElement('a');
-    //             link.href = file.url; // Link to the file
-    //             link.textContent = file.filename;
-    //             link.target = '_blank'; // Open in new tab
-    //             listItem.appendChild(link);
-    //             fileList.appendChild(listItem);
-    //         });
-    //     } catch (error) {
-    //         console.error('Error:', error);
-    //         console.log('An error occurred while loading files. Please try again.');
-    //     }
-    // }
-
-    // Initial load of files
-    
 });
 
 document.addEventListener('DOMContentLoaded', () => {
