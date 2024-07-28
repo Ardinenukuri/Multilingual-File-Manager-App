@@ -12,25 +12,25 @@
         <aside class="w-64 bg-green-800 text-white h-screen p-6 fixed">
             <h2 class="text-2xl font-bold mb-6">Menu</h2>
             <ul class="space-y-4">
-                <li><a href="/home" class="hover:text-green-300">🏠 Home</a></li>
-                <li><a href="/files/uploaded" class="hover:text-green-300">📂 File List</a></li>
-                <li><a href="/files" class="hover:text-green-300">📁 Actions</a></li>
-                <li><a href="/logout" class="hover:text-green-300">🚪 Logout</a></li>
+                <li><a id="nav-home" href="/home" class="hover:text-green-300">🏠 Home</a></li>
+                <li><a id="nav-file-list" href="/files/uploaded" class="hover:text-green-300">📂 File List</a></li>
+                <li><a id="nav-actions" href="/files" class="hover:text-green-300">📁 Actions</a></li>
+                <li><a id="nav-logout" href="/logout" class="hover:text-green-300">🚪 Logout</a></li>
             </ul>
             <div id="language-selector" class="mt-6">
                 <h3 class="text-lg font-semibold">Language</h3>
-                <select id="language-dropdown" onchange="changeLanguage(this.value)" class="mt-2 w-full p-2 rounded border border-gray-300 text-black">
-                    <option value="kirundi">Kirundi</option>
-                    <option value="french">French</option>
-                    <option value="english" selected>English</option>
-                    <option value="swahili">Swahili</option>
-                </select>
+                <select id="language-dropdown" class="mt-2 w-full p-2 rounded border border-gray-300 text-black">
+                    <option value="en">English</option>
+                    <option value="fr">French</option>
+                    <option value="sw">Swahili</option>
+                    <option value="kin">Kinyarwanda</option>
+                </select>                
             </div>
         </aside>
         <main class="ml-64 p-8 flex-1">
-            <h1 class="text-5xl font-bold text-green-800 text-center">Welcome to File Manager</h1>
+            <h1 id="welcome" class="text-5xl font-bold text-green-800 text-center">Welcome to File Manager</h1>
         </main>
     </div>
-    <script src="/script/home.js"></script>
+    <script src="/scripts/translate.js"></script>
 </body>
 </html>

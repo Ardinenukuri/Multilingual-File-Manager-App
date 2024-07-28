@@ -8,7 +8,14 @@
     "title": "File Manager",
     "upload_success": "File uploaded successfully!",
     "upload_fail": "Failed to upload file.",
-    "upload_file": "Upload a File"
+    "upload_file": "Upload a File",
+    "create_text": "Create a File",
+    "upload_text": "Upload a File"
+  },
+  "navbar": {
+    "home" : "Home",
+    "file_list": "File List",
+    "actions": "Actions",
+    "logout": "Logout"
   }
 }
-

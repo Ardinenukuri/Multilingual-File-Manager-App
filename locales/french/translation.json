@@ -1,0 +1,21 @@
+{
+  "welcome_message": "Bienvenue, {{username}}!",
+  "home_page": {
+    "title": "Page d'accueil",
+    "welcome": "Bienvenue sur la page d'accueil!"
+  },
+  "file_manager": {
+    "title": "Gestionnaire de fichiers",
+    "upload_success": "Fichier téléchargé avec succès!",
+    "upload_fail": "Échec du téléchargement du fichier.",
+    "upload_file": "Télécharger un fichier",
+    "create_text": "Créer un fichier",
+    "upload_text": "Télécharger un fichier"
+  },
+  "navbar": {
+    "home" : "Accueil",
+    "file_list": "Liste des fichiers",
+    "actions": "Actions",
+    "logout": "Déconnexion"
+  }
+}

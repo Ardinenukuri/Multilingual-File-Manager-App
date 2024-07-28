@@ -2,7 +2,8 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const i18next = require('./config/i18n');
-const middleware = require('i18next-http-middleware');
+const i18nextMiddleware = require('i18next-http-middleware');
+const Backend = require('i18next-fs-backend');
 const userController = require('./controllers/userController');
 const fileController = require('./controllers/fileController');
 const uploadRoutes = require('./Routes/uploadRoutes');
@@ -13,6 +14,8 @@ const fileRoutes = require('./Routes/fileRoutes');
 require('dotenv').config();
 
 const app = express();
+app.use(i18nextMiddleware.handle(i18next));
+app.use('/locales', express.static(path.join(__dirname, 'locales')));
 
 app.use(session({
   secret: '966290a9bfec4678973d9d147d064ae2948f18327e56289a602acc2f2f1adf3dc0f8db8697ef51e74707bb65fa93584f46cbef7bbe1720dc860e5eda51f7a4d', 
@@ -28,7 +31,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(middleware.handle(i18next));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));

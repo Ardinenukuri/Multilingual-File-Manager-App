@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // }
 
     // Initial load of files
-    loadFiles();
+    
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -125,31 +125,4 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error:', error);
         }
     });
-
-    
-
-    // Function to handle language change
-    document.querySelectorAll('#language-switcher button').forEach(button => {
-        button.addEventListener('click', async (e) => {
-            const lang = e.target.getAttribute('data-lang');
-            await changeLanguage(lang);
-        });
-    });
-
-    async function changeLanguage(lang) {
-        try {
-            const response = await fetch(`/translate?lang=${lang}&messageKey=file_manager`);
-            const result = await response.json();
-            
-            document.getElementById('page-title').textContent = result.message.title;
-            document.querySelector('#upload-form button').textContent = result.message.upload_button;
-        
-
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
-
-    // Initial load of translations
-    changeLanguage('english'); // Default language
 });

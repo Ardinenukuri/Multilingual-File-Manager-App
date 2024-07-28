@@ -1,0 +1,21 @@
+{
+  "welcome_message": "Murahawe ikaze, {{username}}!",
+  "home_page": {
+    "title": "Urupapuro rw'itangiriro",
+    "welcome": "Murahawe ikaze ku rupapuro rw'itangiriro!"
+  },
+  "file_manager": {
+    "title": "Ubuyobozi bw'amadosiye",
+    "upload_success": "Ifishi yashyizweho neza!",
+    "upload_fail": "Byanze gushyiraho ifishi.",
+    "upload_file": "Shyiraho ifishi",
+    "create_text": "Hanga ifishi",
+    "upload_text": "Shyiraho ifishi"
+  },
+  "navbar": {
+    "home" : "Ahabanza",
+    "file_list": "Urutonde rw'amadosiye",
+    "actions": "Ibikorwa",
+    "logout": "Sohoka"
+  }
+}

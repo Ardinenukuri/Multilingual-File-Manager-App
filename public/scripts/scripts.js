@@ -83,27 +83,4 @@ document.addEventListener('DOMContentLoaded', () => {
     const username = localStorage.getItem('username') || 'User';
     document.getElementById('username').textContent = username;
 });
-document.addEventListener('DOMContentLoaded', () => {
-    // Function to handle language change
-    document.getElementById('language-dropdown').addEventListener('change', async (e) => {
-        const selectedLanguage = e.target.value;
-        await changeLanguage(selectedLanguage);
-    });
 
-    async function changeLanguage(lang) {
-        try {
-            const response = await fetch(`/translate?lang=${lang}&messageKey=home_page`);
-            const result = await response.json();
-            
-            document.querySelector('.content h1').innerHTML = `Welcome, <span id="username">User</span>!`;
-            document.querySelector('.content h2').textContent = result.message.title;
-            document.querySelector('.content h3').textContent = result.message.welcome;
-
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
-
-    // Initial load of translations
-    changeLanguage('english'); // Default language
-});
